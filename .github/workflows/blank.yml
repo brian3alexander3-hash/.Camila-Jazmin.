@@ -1,0 +1,29 @@
+name: Descomprimir Camila Jazmin
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Descomprimir ZIP
+        run: |
+          unzip -o "Camila Jazmin.zip" -d .
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || (
+            git commit -m "Descomprimir proyecto Camila Jazmin"
+            git push
+          )
